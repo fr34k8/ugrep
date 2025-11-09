@@ -18,7 +18,13 @@ AC_STRUCT_DIRENT_D_TYPE
 
 AC_FUNC_MMAP
 
-AC_CHECK_HEADERS([sys/time.h sys/statvfs.h sys/param.h sys/mount.h sys/cpuset.h sys/resource.h sched.h])
+AC_CHECK_HEADERS([sys/time.h sys/statvfs.h sys/param.h sys/mount.h sys/resource.h sched.h])
+AC_CHECK_HEADERS([sys/cpuset.h],[],[],[
+$ac_includes_default
+#ifdef HAVE_SYS_PARAM_H
+#include <sys/param.h>
+#endif
+])
 
 AC_CHECK_FUNCS([statfs statvfs])
 
