@@ -6698,7 +6698,15 @@ void init(int argc, const char **argv)
 
   // if no regex pattern is specified and no -e PATTERN and no -f FILE and not -Q, then exit with usage message
   if (Static::arg_pattern == NULL && pattern_args.empty() && flag_file.empty() && !flag_query)
-    usage("no PATTERN specified: specify --match or an empty \"\" pattern to match all input");
+    usage(
+  "No search PATTERN specified.\n\n"
+  "Examples:\n"
+  "  ugrep \"pattern\" .\n"
+  "  ugrep \"\" .        (match all lines)\n\n"
+  "For more help, run: ugrep --help"
+);
+
+
 
   // regex PATTERN should be a FILE argument when -Q or -e PATTERN is specified
   if (!flag_match && Static::arg_pattern != NULL && (flag_query || !pattern_args.empty()))
