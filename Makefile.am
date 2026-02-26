@@ -122,7 +122,7 @@ uninstall-hook:
 
 .PHONY:		test
 
-test:		${UGREP}
+test check:		${UGREP}
 		@echo
 		@echo "*** SINGLE-THREADED TESTS ***"
 		@echo
