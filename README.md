@@ -339,6 +339,12 @@ Check <https://packages.debian.org/ugrep> for version info.  To build and try
 
 Check <https://packages.fedoraproject.org/pkgs/ugrep/ugrep/> for version info.
 
+### Gentoo
+
+    $ emerge sys-apps/ugrep
+
+Check <https://packages.gentoo.org/packages/sys-apps/ugrep> for version info.
+
 ### FreeBSD
 
     $ pkg install ugrep
