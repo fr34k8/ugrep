@@ -48,6 +48,7 @@ $UGREP --help 2>&1 \
     | sed -e :a -e '$!N;s/\n[ ]\{7\}//;ta' -e 'P;D' \
     | sed -E -e "s/ /'[/" -e "s/\.?$/\]/" \
     | sed -E -e "s/--hexdump/--hexdump=-/" -e "s/--sort'/--sort=-'/" -e "s/-Z,--fuzzy/-Z-,--fuzzy=-/" \
+    | sed -E -e "s/--tree,-\^/--tree,-'^'/" \
     | sed -E -e "/\{-D/s/$/:ACTION:(read skip)/" -e "/\{-d/s/$/:ACTION:(read recurse skip)/" \
     | sed -E -e "/\{-g/s/$/:GLOB:( )/" -e "/\{-[eMN]/s/$/:PATTERN:( )/" -e "/\{-f/s/$/:FILE:_files/" -e "/\{-[ABCJ]/s/$/:NUM:( )/" -e "/\{-[Km]/s/$/:MIN,MAX:( )/" -e "/\{-O/s/$/:EXT:( )/" \
     | sed -E -e "/\{-t/s/$/:TYPES:($TYPES)/" -e "/--encoding/s/$/:ENCODING:($ENCODING)/" \

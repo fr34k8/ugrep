@@ -669,8 +669,10 @@ getcode(struct s_zstate *zs)
 		bits -= 8;
 	}
 
-	/* High order bits. */
-	gcode |= (*bp & rmask[bits]) << r_off;
+	/* High order bits. (RvE) fixed to avoid reading one byte past gbuf[] */
+        if (bp < gbuf + sizeof(gbuf))
+          gcode |= (*bp & rmask[bits]) << r_off;
+
 	roffset += n_bits;
 
 	return (gcode);
