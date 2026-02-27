@@ -12489,23 +12489,15 @@ void Grep::search(const char *pathname, uint16_t cost)
             if (out.eof)
               goto exit_search;
 
-            // --max-count: max number of matches reached?
-            if (flag_max_count > 0 && matches > flag_max_count)
-            {
-              if (flag_after_context == 0 || matches > flag_max_count + 1)
-                break;
-
-              // one more iteration to get the after context to output
-              lineno = current_lineno;
-              context_handler.set_after_lineno(lineno + matcher->lines());
-              continue;
-            }
-
             // get the lines before the matched line
             context = matcher->before();
 
             if (context.len > 0)
               context_handler(*matcher, context.buf, context.len, context.num);
+
+            // --max-count: max number of matches reached?
+            if (flag_max_count > 0 && matches > flag_max_count)
+              break;
 
             context_handler.output_before_context();
 
