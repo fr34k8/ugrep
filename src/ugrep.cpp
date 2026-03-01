@@ -482,7 +482,7 @@ size_t strtonum(const char *string, const char *message);
 size_t strtopos(const char *string, const char *message);
 void strtopos2(const char *string, size_t& pos1, size_t& pos2, const char *message);
 size_t strtofuzzy(const char *string, const char *message);
-void import_globs(FILE *file, std::vector<std::string>& files, std::vector<std::string>& dirs, bool gitignore = false);
+void import_globs(FILE *file, std::vector<std::string>& files, std::vector<std::string>& dirs, bool gitignore = false, const char *pathname = NULL);
 void usage(const char *message, const char *arg = NULL, const char *valid = NULL);
 void help(std::ostream& out);
 void help(const char *what = NULL);
@@ -9718,9 +9718,11 @@ void Grep::recurse(size_t level, const char *pathname)
           saved = true;
         }
 
-        // push globs imported from the ignore file to the back of the vectors
         Stats::ignore_file(ignore_filename);
-        import_globs(file, flag_all_exclude, flag_all_exclude_dir, true);
+
+        // push globs imported from the ignore file to the back of the vectors
+        import_globs(file, flag_all_exclude, flag_all_exclude_dir, true, pathname);
+
         fclose(file);
       }
     }
@@ -13429,10 +13431,11 @@ void Grep::extract(const char *filename, const char *findpart, FILE *output)
 }
 
 // read globs from a file and split them into files or dirs to include or exclude by pushing them onto the vectors
-void import_globs(FILE *file, std::vector<std::string>& files, std::vector<std::string>& dirs, bool gitignore)
+void import_globs(FILE *file, std::vector<std::string>& files, std::vector<std::string>& dirs, bool gitignore, const char *pathname)
 {
   // read globs from the specified file or files
   reflex::BufferedInput input(file);
+  std::string pathname_glob;
   std::string line;
 
   while (true)
@@ -13447,8 +13450,32 @@ void import_globs(FILE *file, std::vector<std::string>& files, std::vector<std::
     // add glob to files or dirs using gitignore glob pattern rules
     if (!line.empty() && line.front() != '#')
     {
-      if (line.front() != '!' || line.size() > 1)
+      if (line.size() > 1 || (line.front() != '!' && line.front() != '^'))
       {
+        // if pathname is specified, then expand the local pathname to replace the root dir / in globs
+        if (pathname != NULL && *pathname != '\0')
+        {
+          size_t pos = (line.front() == '!' || line.front() == '^');
+
+          if (line.size() > pos && line.at(pos) == '/')
+          {
+            // create pathname glob on demand by escaping *, ?, [, and \ in the pathname to match literally
+            if (pathname_glob.empty())
+            {
+              pathname_glob.assign(pathname);
+
+              for (size_t i = 0; i < pathname_glob.size(); ++i)
+              {
+                int ch = pathname_glob.at(i);
+                if (ch == '*' || ch == '?' || ch == '[' || ch == '\\')
+                  pathname_glob.insert(i++, "\\", 1);
+              }
+            }
+
+            line.insert(pos, pathname_glob);
+          }
+        }
+
         if (line.back() == '/')
         {
           if (line.size() > 1)
