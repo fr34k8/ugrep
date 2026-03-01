@@ -3936,8 +3936,8 @@ void Query::get_flags()
   flags_[45].flag = flag_heading;
   flags_[46].flag = flag_sort && (strcmp(flag_sort, "best") == 0 || strcmp(flag_sort, "rbest") == 0);
   flags_[47].flag = flag_sort && (strcmp(flag_sort, "size") == 0 || strcmp(flag_sort, "rsize") == 0);
-  flags_[48].flag = flag_sort && (strcmp(flag_sort, "changed") == 0 || strcmp(flag_sort, "changed") == 0);
-  flags_[49].flag = flag_sort && (strcmp(flag_sort, "created") == 0 || strcmp(flag_sort, "created") == 0);
+  flags_[48].flag = flag_sort && (strcmp(flag_sort, "changed") == 0 || strcmp(flag_sort, "rchanged") == 0);
+  flags_[49].flag = flag_sort && (strcmp(flag_sort, "created") == 0 || strcmp(flag_sort, "rcreated") == 0);
   flags_[50].flag = flag_sort && *flag_sort == 'r';
 }
 
