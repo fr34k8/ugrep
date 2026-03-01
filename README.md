@@ -1966,6 +1966,8 @@ Same, but with pretty output with headings, line numbers and column numbers
             a `/'.  Files and directories explicitly specified as command line
             arguments are never ignored.  This option may be repeated to
             specify additional files.
+            See also related option --exclude-from for a global set of
+            exclusions.
     -g GLOBS, --glob=GLOBS
             Search only files whose name matches the specified comma-separated
             list of GLOBS, same as --include='glob' for each `glob' in GLOBS.
@@ -2256,6 +2258,8 @@ search the files:
             a `/'.  Files and directories explicitly specified as command line
             arguments are never ignored.  This option may be repeated to
             specify additional files.
+            See also related option --exclude-from for a global set of
+            exclusions.
     -M MAGIC, --file-magic=MAGIC
             Only files matching the signature pattern MAGIC are searched.  The
             signature \"magic bytes\" at the start of a file are compared to
@@ -2730,6 +2734,8 @@ source):
             a `/'.  Files and directories explicitly specified as command line
             arguments are never ignored.  This option may be repeated to
             specify additional files.
+            See also related option --exclude-from for a global set of
+            exclusions.
 
 Option `--ignore-files` looks for `.gitignore`, or the specified `FILE`, in
 recursive searches.  When `.gitignore`, or the specified `FILE`, is found while
@@ -2827,6 +2833,8 @@ implicit:
             previously-specified exclusions by including matching files.  Lines
             starting with a `#' and empty lines in FILE are ignored.  When FILE
             is a `-', standard input is read.  This option may be repeated.
+            See also related option --ignore-files for subdirectory-specific
+            lists of exclusions.
     --from=FILE
             Read additional pathnames of files to search from FILE.  When FILE
             is a `-', standard input is read.  This option is useful with `find
@@ -2842,6 +2850,8 @@ implicit:
             a `/'.  Files and directories explicitly specified as command line
             arguments are never ignored.  This option may be repeated to
             specify additional files.
+            See also related option --exclude-from for a global set of
+            exclusions.
     --include=GLOB
             Search only files whose name matches GLOB using wildcard matching,
             same as -g GLOB.  GLOB can use **, *, ?, and [...] as wildcards,
@@ -4320,6 +4330,8 @@ in markdown:
                   files.  Lines starting with a `#' and empty lines in FILE are
                   ignored.  When FILE is a `-', standard input is read.  This option
                   may be repeated.
+                  See also related option --ignore-files for subdirectory-specific
+                  lists of exclusions.
 
            --exclude-fs=MOUNTS
                   Exclude file systems specified by MOUNTS from recursive searches.
@@ -4480,6 +4492,8 @@ in markdown:
                   in a `/'.  Files and directories explicitly specified as command
                   line arguments are never ignored.  This option may be repeated to
                   specify additional files.
+                  See also related option --exclude-from for a global set of
+                  exclusions.
 
            --no-ignore-files
                   Do not ignore files, i.e. cancel --ignore-files when specified.

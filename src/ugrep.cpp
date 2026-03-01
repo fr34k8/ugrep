@@ -14034,6 +14034,8 @@ void help(std::ostream& out)
             previously-specified exclusions by including matching files.  Lines\n\
             starting with a `#' and empty lines in FILE are ignored.  When FILE\n\
             is a `-', standard input is read.  This option may be repeated.\n\
+            See also related option --ignore-files for subdirectory-specific\n\
+            lists of exclusions.\n\
     --exclude-fs=MOUNTS\n\
             Exclude file systems specified by MOUNTS from recursive searches.\n\
             MOUNTS is a comma-separated list of mount points or pathnames to\n\
@@ -14184,6 +14186,8 @@ void help(std::ostream& out)
             a `/'.  Files and directories explicitly specified as command line\n\
             arguments are never ignored.  This option may be repeated to\n\
             specify additional files.\n\
+            See also related option --exclude-from for a global set of\n\
+            exclusions.\n\
     --no-ignore-files\n\
             Do not ignore files, i.e. cancel --ignore-files when specified.\n\
     --include=GLOB\n\
