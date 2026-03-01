@@ -360,6 +360,8 @@ Otherwise files are excluded.  A glob starting with a `!' overrides
 previously\-specified exclusions by including matching files.  Lines
 starting with a `#' and empty lines in FILE are ignored.  When FILE
 is a `\-', standard input is read.  This option may be repeated.
+See also related option \fB\-\-ignore\-files\fR for subdirectory\-specific
+lists of exclusions.
 .TP
 \fB\-\-exclude\-fs\fR=\fIMOUNTS\fR
 Exclude file systems specified by MOUNTS from recursive searches.
@@ -516,6 +518,8 @@ files.  Directories are specifically excluded when the glob ends in
 a `/'.  Files and directories explicitly specified as command line
 arguments are never ignored.  This option may be repeated to
 specify additional files.
+See also related option \fB\-\-exclude\-from\fR for a global set of
+exclusions.
 .TP
 \fB\-\-no\-ignore\-files\fR
 Do not ignore files, i.e. cancel \fB\-\-ignore\-files\fR when specified.
